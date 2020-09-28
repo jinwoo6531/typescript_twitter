@@ -6,10 +6,11 @@ import Profile from 'routes/Profile';
 import Navigation from 'components/Navigation';
 
 interface AppRouterPorps {
-  isLoggedIn: boolean;
+  isLoggedIn?: boolean;
+  userObj?: firebase.User;
 }
 
-const AppRouter: React.FC<AppRouterPorps> = ({ isLoggedIn }) => {
+const AppRouter: React.FC<AppRouterPorps> = ({ isLoggedIn, userObj }) => {
   return (
     <Router>
       {isLoggedIn && <Navigation />}
@@ -17,7 +18,7 @@ const AppRouter: React.FC<AppRouterPorps> = ({ isLoggedIn }) => {
         {isLoggedIn ? (
           <>
             <Route exact path="/">
-              <Home />
+              <Home userObj={userObj} />
             </Route>
             <Route exact path="/profile">
               <Profile />
